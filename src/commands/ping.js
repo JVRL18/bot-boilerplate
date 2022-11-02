@@ -1,13 +1,19 @@
 const {SlashCommandBuilder} = require('discord.js')
 
+const code = (where, client) => {
+    return where.reply(`Pong latency is ${where.client.ws.ping}ms`)
+}
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Get bot latency"),
     run: (interaction,client,typo) => {
-        return interaction.reply(`Pong latency is ${interaction.client.ws.ping}ms`)
+        
+        code(interaction, client)
     },
     execute:(message, client, input1, typo) => {
-        message.reply(`Pong latency is ${message.client.ws.ping}ms`)
+
+        code(message, client)
     }
 }

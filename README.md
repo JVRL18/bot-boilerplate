@@ -44,8 +44,12 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 
 ## 🗃 Histórico de lançamentos
 
-* 0.1.0 - 10/01/2022
+* 0.1.0 - 25/10/2022
     * Lançamento do projeto base.
+* 0.2.0 - 02/11/2022
+    * Add pokemon unite profile lookup feature as required
+    * Create temporary voice chat features
+    * Start working on owner interface configuration page
 
 ## 📋 Licença/License
 

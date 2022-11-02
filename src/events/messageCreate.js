@@ -49,7 +49,7 @@ module.exports = {
 					name = [key]
 				}
 			}
-			return message.channel.send({ embeds: [justAText(`❌ Comando não encontrado!\n🎈 Você quis dizer ${client.prefix}${name === '' ? 'comandos' : name}?\n\n⭐Dica: acesse ${client.prefix}COMANDOS`, '#B026FF')] })
+			return message.channel.send({ embeds: [justAText(`❌ Comando não encontrado!\n🎈 Você quis dizer ${client.prefix}${name === '' ? 'comandos' : name}?\n\n⭐Dica: acesse ${client.prefix}comandos`, '#B026FF')] })
 		};
 
 		const command = client.commands.get(commandName);
