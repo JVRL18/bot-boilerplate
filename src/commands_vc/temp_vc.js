@@ -3,10 +3,8 @@ const {User, Guild} = require('../models/schemas')
 module.exports = {
     type: 0,
     async execute(oldState, newState, client){
-        const serverId = newState.guild.id
         const channelId = newState.channel.id
-
-        if (newState.channel.members.size == 2) {
+        if (newState.channel.members.size == 1) {
             let userData
             let users = []
             let channel = newState.channel
@@ -20,7 +18,7 @@ module.exports = {
         
                 await userData.save()
             }
-        
+            const child =  serverData.channels[`${channelId}`].configs
             let rooms = serverData.channels[`${channelId}`].rooms
             let num = 1
             if (rooms.length === 0) rooms.push(num)
@@ -31,13 +29,13 @@ module.exports = {
                     break
                 }
             }
-        
+            console.log(child)
             const newChannel = await newState.guild.channels.create({
-                name: `🍷| Couple » ${num}`,
-                type: 2,
-                position: channel.rawPosition + 1,
-                parent: channel.parentId,
-                userLimit: 2
+                name: child.name,
+                type: child.type,
+                position: child.position,
+                parent: child.parent,
+                userLimit: child.userLimit
             })
             serverData.save()
         

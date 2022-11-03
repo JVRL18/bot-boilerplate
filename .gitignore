@@ -1,8 +1,4 @@
 # Default
 /node_modules
-env
 .env
 .gitignore
-
-# mudar as configs aikkkkkkkkkkkkkkkk
-.env

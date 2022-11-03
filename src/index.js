@@ -17,26 +17,39 @@ const client = new Client({ intents: myIntents });
 client.prefix = process.env.PREFIX
 client.commands = new Discord.Collection()
 
-const extraCmds = []
 const commandFiles = [];
 
-	(findCommands = async (path = 'commands') => {
-		fs.readdirSync(`./src/${path}`).filter(async file => {
-			if(file === 'aliases') return
-			if(file.endsWith('.js')) return commandFiles.push(file)
-			findCommands(path+`/${file}`)
-		})
-	})()
+(findCommands = async (path = 'commands') => {
+	fs.readdirSync(`./src/${path}`).filter(async file => {
+		if (file === 'aliases') return
+		if (file.endsWith('.js')) return commandFiles.push(file)
+		findCommands(path + `/${file}`)
+	})
+})()
 
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
+	let commander
+	const getCommands = (name, path = 'commands') => {
 
-	const command = require(`./commands/${file}`);
+		const dirr = `./src/${path}`
 
+		fs.readdirSync(dirr).filter(find => {
+			if (find === name){
+				commander = `./${path}/${find}`
+			}else{
+				if (find.endsWith('js') === true) return 
+				if (find === 'aliases') return
+				return getCommands(name, path + `/${find}`)
+			}
+		})
+	}
+	getCommands(file)
+
+	const command = require(commander)	
 	client.commands.set(command.name === undefined ? command.data.name : command.name, command);
-
-}
+}	
 
 for (const file of eventFiles) {
 
@@ -68,10 +81,10 @@ for (const file of eventFiles) {
 
 client.login(process.env.BOT_KEY).then(async () => {
 	console.log('Bot está online\n')
-	// await mongoose.connect(
-	// 	process.env.MONGO_URI || '', {
-	// 	keepAlive: true,
-	// }
-	// )
+	await mongoose.connect(
+		process.env.MONGO_URI || '', {
+		keepAlive: true,
+	}
+	)
 	console.log('Conectado a DB')
 });

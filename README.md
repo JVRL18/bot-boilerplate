@@ -53,6 +53,9 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 * 0.2.1 - 02/11/2022
     * Changed folder structure on commands now it's based by utility
     * Changed command "finder" so it searchs recursively in commands folder
+    * Finish add/remove feature on owner config menu
+    * Change temp_vc.js variables to acess database variables
+    * Change event voice state variables to access database variables
 
 ## 📋 Licença/License
 

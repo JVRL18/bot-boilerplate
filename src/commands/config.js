@@ -30,6 +30,9 @@ const code = async (user, Guild, client, where) => {
                         if(int.values[0] === 'create'){
                             event.create.execute(Guild, client, where, int)
                         }
+                        if(int.values[0] === 'delete'){
+                            event.delete.execute(Guild, client, where, int)
+                        }
                         
                     })
                 }

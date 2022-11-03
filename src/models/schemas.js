@@ -37,13 +37,13 @@ class Channel{
                 name:this.name,
                 type:this.type,
                 rooms:this.rooms,
-                id:this.id,
+                id:this.channelId,
                 configs:{
                     name: this.childName,
                     type: this.channelType,
                     position: this.position,
                     parent: this.parent,
-                    userLimit: this.userLimit
+                    userLimit: this.userLimit,
                 }
             }
         }
