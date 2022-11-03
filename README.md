@@ -50,6 +50,9 @@ Para abrir este projeto você necessita das seguintes ferramentas:
     * Add pokemon unite profile lookup feature as required
     * Create temporary voice chat features
     * Start working on owner interface configuration page
+* 0.2.1 - 02/11/2022
+    * Changed folder structure on commands now it's based by utility
+    * Changed command "finder" so it searchs recursively in commands folder
 
 ## 📋 Licença/License
 

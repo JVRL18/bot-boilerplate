@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { User } = require('../models/schemas')
+const { User } = require('../../models/schemas')
 const prettyMilliseconds = require('pretty-ms')
-const { justAText } = require('../assets/embeds/global')
+const { justAText } = require('../../assets/embeds/global')
 
 const code = (user, userData, where) => {
     if (userData.cooldowns.daily > Date.now()) {

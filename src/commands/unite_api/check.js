@@ -84,8 +84,8 @@ return fetch(`https://uniteapi.dev/p/${player}`)
 }
 
 const {SlashCommandBuilder} = require('discord.js')
-const { embed_404_user, embed_404_error_message, await_fetching } = require('../assets/embeds/global')
-const { unite_profile_embed } = require('../assets/embeds/unite_api')
+const { embed_404_user, embed_404_error_message, await_fetching } = require('../../assets/embeds/global')
+const { unite_profile_embed } = require('../../assets/embeds/unite_api')
 
 const code = async (where, client, name) => {
     const msg = await where.reply({embeds:[await_fetching()]})

@@ -1,23 +1,20 @@
 const { EmbedBuilder } = require('discord.js')
 const { SlashCommandBuilder } = require('discord.js')
-const { balanceEmbed } = require('../assets/embeds/balance')
-const { User } = require('../models/schemas')
+const { User } = require('../../models/schemas')
 
 const code = (user, userData, where, client) => {
-    return where.reply({
-        embeds:[balanceEmbed(client.users.cache.get(user.id), userData)]
-    })
+
 }
 
 module.exports = {
-    name: 'balance',
+    name: 'give',
     data: new SlashCommandBuilder()
-    .setName('balance') 
-    .setDescription(`Shows your balance or anothers user's balance`)
+    .setName('give') 
+    .setDescription(`Send money for someone.`)
     .addUserOption(
         option => option
         .setName("user")
-        .setDescription("Person who you want to check")
+        .setDescription("Person who you want to send money")
     ),
     run: async (interaction, client, typo) => {
         const user = interaction.options.getUser("user") || interaction.member.user

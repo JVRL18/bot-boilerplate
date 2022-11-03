@@ -17,7 +17,17 @@ const client = new Client({ intents: myIntents });
 client.prefix = process.env.PREFIX
 client.commands = new Discord.Collection()
 
-const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js'))
+const extraCmds = []
+const commandFiles = [];
+
+	(findCommands = async (path = 'commands') => {
+		fs.readdirSync(`./src/${path}`).filter(async file => {
+			if(file === 'aliases') return
+			if(file.endsWith('.js')) return commandFiles.push(file)
+			findCommands(path+`/${file}`)
+		})
+	})()
+
 const eventFiles = fs.readdirSync('./src/events').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
