@@ -1,6 +1,6 @@
 {
-  "ping": [
-    "ping"
+  "config": [
+    "config"
   ],
   "balance": [
     "balance"
@@ -8,10 +8,22 @@
   "daily": [
     "daily"
   ],
-  "config": [
-    "config"
+  "give": [
+    "give"
+  ],
+  "ping": [
+    "ping"
   ],
   "check": [
     "check"
+  ],
+  "test": [
+    "test"
+  ],
+  "withdraw": [
+    "withdraw"
+  ],
+  "deposit": [
+    "deposit"
   ]
 }

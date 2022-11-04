@@ -20,11 +20,12 @@ module.exports = {
 			}
 			return false
 		}
-		const input1 = args[1]
 		const msg = args.shift().toLowerCase()
 
+		const input1 = args[1]
 		const commandName = await checkCommandAlts(msg)
 		
+		console.log(commandName)
 		//Suggestion system when command spelling is wrong
 		if (!client.commands.has(commandName)) {
 			let finder = {}
@@ -49,12 +50,12 @@ module.exports = {
 					name = [key]
 				}
 			}
-			return message.channel.send({ embeds: [justAText(`❌ Comando não encontrado!\n🎈 Você quis dizer ${client.prefix}${name === '' ? 'comandos' : name}?\n\n⭐Dica: acesse ${client.prefix}comandos`, '#B026FF')] })
+			return message.channel.send({ embeds: [justAText(`❌ Command not found!\n🎈 did you mean ${client.prefix}${name === '' ? 'comandos' : name}?\n\n⭐Dica: acesse ${client.prefix}comandos`, '#B026FF')] })
 		};
 
 		const command = client.commands.get(commandName);
 		try {
-			command.execute(message, client, input1, typo)
+			command.execute(message, client, input1, args, typo)
 
 		} catch (err) { console.log(err) }
 	},

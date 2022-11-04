@@ -56,7 +56,11 @@ Para abrir este projeto você necessita das seguintes ferramentas:
     * Finish add/remove feature on owner config menu
     * Change temp_vc.js variables to acess database variables
     * Change event voice state variables to access database variables
-
+* 0.3.0 - 04/11/2022
+    * Fix bugs of text commands register errors.
+    * New economy commands: Give, Withdraw, deposit.
+    * Changed messageCreate commands execute arguments to get all parms by an array.
+    
 ## 📋 Licença/License
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">INTELI, VICTOR BRUNO ALEXANDER ROSETTI DE QUIROZ</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
