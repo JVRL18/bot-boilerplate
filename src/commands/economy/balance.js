@@ -1,6 +1,5 @@
-const { EmbedBuilder } = require('discord.js')
 const { SlashCommandBuilder } = require('discord.js')
-const { balanceEmbed } = require('../../assets/embeds/balance')
+const { balanceEmbed } = require('../../assets/embeds/economy')
 const { User } = require('../../models/schemas')
 
 const code = (user, userData, where, client) => {

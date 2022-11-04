@@ -3,4 +3,4 @@
 .env
 .gitignore
 config.json
-index.js
+commands.json

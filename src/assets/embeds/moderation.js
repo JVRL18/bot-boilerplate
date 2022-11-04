@@ -4,16 +4,17 @@ this.kick = (user, reason) => {
   const embed = new EmbedBuilder()
     .setTitle("KICK")
     .setDescription("Are you sure you want to kick this user?")
-    .addFields(
+    .setColor("#FFC42E")
+    .addFields([
       {
-        text: "Name:",
+        name: "Name:",
         value: user.username,
       },
       {
-        text: "Reason:",
+        name: "Reason:",
         value: `\`\`\`${reason}\`\`\``,
-      }
+      }]
     )
-    .setColor("#FFC42E");
+    
   return embed;
 };

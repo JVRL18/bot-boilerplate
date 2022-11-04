@@ -1,8 +1,29 @@
 {
-  "ping": ["ping"],
-  "balance": ["balance"],
-  "daily": ["daily"],
-  "config": ["config"],
-  "check": ["check"],
-  "kick": ["kick"]
+  "config": [
+    "config"
+  ],
+  "balance": [
+    "balance"
+  ],
+  "daily": [
+    "daily"
+  ],
+  "deposit": [
+    "deposit"
+  ],
+  "give": [
+    "give"
+  ],
+  "withdraw": [
+    "withdraw"
+  ],
+  "kick": [
+    "kick"
+  ],
+  "ping": [
+    "ping"
+  ],
+  "check": [
+    "check"
+  ]
 }
