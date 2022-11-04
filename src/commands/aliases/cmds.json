@@ -1,17 +1,8 @@
 {
-  "ping": [
-    "ping"
-  ],
-  "balance": [
-    "balance"
-  ],
-  "daily": [
-    "daily"
-  ],
-  "config": [
-    "config"
-  ],
-  "check": [
-    "check"
-  ]
+  "ping": ["ping"],
+  "balance": ["balance"],
+  "daily": ["daily"],
+  "config": ["config"],
+  "check": ["check"],
+  "kick": ["kick"]
 }
