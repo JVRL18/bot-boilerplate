@@ -59,7 +59,13 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 * 0.3.0 - 04/11/2022
     * Fix bugs of text commands register errors.
     * New economy commands: Give, Withdraw, deposit.
+    * New moderation command dev start: Kick.
     * Changed messageCreate commands execute arguments to get all parms by an array.
+    * Removed index.js
+* 0.3.1 - 04/11/2022
+    * Bug fixes in kick commands.
+    * Variable input1 at messageCreate changed to first element of args.
+    * Added index.js
     
 ## 📋 Licença/License
 

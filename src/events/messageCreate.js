@@ -22,7 +22,7 @@ module.exports = {
 		}
 		const msg = args.shift().toLowerCase()
 
-		const input1 = args[1]
+		const input1 = args[0]
 		const commandName = await checkCommandAlts(msg)
 		
 		console.log(commandName)

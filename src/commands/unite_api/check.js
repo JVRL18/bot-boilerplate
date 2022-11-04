@@ -119,8 +119,6 @@ const code = async (where, client, name) => {
   return msg.edit({ embeds: [await unite_profile_embed(infos)] });
 };
 
-const { prefix } = require("../../config.json");
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("check")

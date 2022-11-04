@@ -25,5 +25,8 @@
   ],
   "deposit": [
     "deposit"
+  ],
+  "kick": [
+    "kick"
   ]
 }
