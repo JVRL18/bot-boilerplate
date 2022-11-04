@@ -26,10 +26,4 @@
   "deposit": [
     "deposit"
   ]
-  "ping": ["ping"],
-  "balance": ["balance"],
-  "daily": ["daily"],
-  "config": ["config"],
-  "check": ["check"],
-  "kick": ["kick"]
 }
