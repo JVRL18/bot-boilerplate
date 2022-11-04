@@ -13,23 +13,20 @@ module.exports = {
     .setName("kick")
     .setDescription("Kick an user")
     .addUserOption((opt) =>
-      opt
-        .setName("user")
-        .setDescription("Choose the user to kick")
-        .setRequired(true)
+      opt.setName("user").setDescription("Choose the user to kick")
     )
     .addStringOption((option) =>
       option.setName("reason").setDescription("The reason for kicking")
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
     .setDMPermission(false),
-  execute: async (interaction, client) => {
+  run: async (interaction, client) => {
     const user = interaction.options.getUser("user") || interaction.member.user;
     const reason = interaction.options.getString("reason") ?? "Not specified.";
 
     code(user, reason, interaction);
   },
-  run: async (message, client, input1, input2) => {
+  execute: async (message, client, input1, input2) => {
     const user =
       input1 === undefined
         ? message.reply({ content: "You must provide a user." })
@@ -37,5 +34,11 @@ module.exports = {
           undefined
         ? message.reply({ content: "You must provide a valid user." })
         : client.users.cache.get(input1.slice(2, input1.length - 1));
+
+    const reason = input2;
+    if (!reason) input2 == "Not reason provided";
+    reason.slice(1).join(" ");
+
+    console.log(reason);
   },
 };
