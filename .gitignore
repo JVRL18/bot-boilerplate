@@ -3,3 +3,5 @@
 .env
 .gitignore
 index.js
+config.json
+index.js
