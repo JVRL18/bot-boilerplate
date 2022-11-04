@@ -1,0 +1,29 @@
+{
+  "config": [
+    "config"
+  ],
+  "balance": [
+    "balance"
+  ],
+  "daily": [
+    "daily"
+  ],
+  "deposit": [
+    "deposit"
+  ],
+  "give": [
+    "give"
+  ],
+  "withdraw": [
+    "withdraw"
+  ],
+  "kick": [
+    "kick"
+  ],
+  "ping": [
+    "ping"
+  ],
+  "check": [
+    "check"
+  ]
+}

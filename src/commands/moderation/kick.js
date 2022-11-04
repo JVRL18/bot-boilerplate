@@ -34,7 +34,7 @@ module.exports = {
 
     const kicked = inputs[0].slice(2, inputs[0].length - 1)
     const user = await client.users.cache.get(kicked)
-    console.log(user)
+    
     if(user === undefined) return message.reply({ content: "You must provide a valid user."})
     
     const reason = inputs[1] === undefined ? 'Not specified' : inputs[1]

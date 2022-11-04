@@ -7,7 +7,6 @@ module.exports = {
     //register app commands
     let path = fs.readdirSync('./src/commands')
     let data = JSON.parse(fs.readFileSync('./src/commands/aliases/cmds.json'))
-
     for (key of path) {
 
       if (key.endsWith('.js') === false) {
@@ -45,16 +44,15 @@ module.exports = {
         return console.log('[!] Commands set globally');
       }
     }
+    
     //send hello
     let servers = client.guilds.cache.map((g) => g.name).length;
     const channel = client.channels.cache.get("1035675689204072448");
-    x = "servidor";
-    if (servers > 1) {
-      x = "servidores";
-    }
+    x = servers > 1 ? "server" : "servers";
+
     let embed = new EmbedBuilder()
       .setColor("#00FF00")
-      .setFooter({ text: `✔️ ONLINE! Agora em ${servers} ${x}` })
+      .setFooter({ text: `✔️ ONLINE! in ${servers} ${x}` })
       .setTimestamp();
     //channel.send({ embeds: [embed] });
 
