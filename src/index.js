@@ -17,6 +17,7 @@ const { token, MONGO_URI, prefix } = require("./config.json");
 const client = new Client({ intents: myIntents });
 client.prefix = prefix;
 client.commands = new Discord.Collection();
+client.buttons = new Discord.Collection();
 
 const commandFiles = [];
 

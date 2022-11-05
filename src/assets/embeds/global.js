@@ -11,6 +11,14 @@ this.justAText = (text, color) => {
   return embed;
 };
 
+this.noPerm = () => {
+  const embed = new EmbedBuilder()
+    .setDescription("Hey! You don't have permission to do that!")
+    .setColor("#FFC42E");
+
+  return embed;
+};
+
 this.embed_404_user = (text) => {
   const embed = new EmbedBuilder()
     .setColor("FF0000")
