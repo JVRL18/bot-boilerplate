@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const { give_confirm_button } = require('../../assets/components/economy')
+const { give_confirm_button } = require('../../assets/buttons/economy')
 const { success_give_transaction, give_confirm_embed, give_fail_embed } = require('../../assets/embeds/economy')
 const { embed_404_error_message } = require('../../assets/embeds/global')
 const { User } = require('../../models/schemas')
