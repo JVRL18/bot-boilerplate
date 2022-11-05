@@ -12,6 +12,7 @@ const User = new mongoose.Schema({
   cooldowns: {
     daily: { type: Date },
     channels: { type: Number, default: 0 },
+    beg : { type: Date }
   },
 });
 
