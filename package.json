@@ -1,6 +1,6 @@
 {
   "name": "jay-boilerplate",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "betterbot boilerplate",
   "main": "./src/index.js",
   "scripts": {
