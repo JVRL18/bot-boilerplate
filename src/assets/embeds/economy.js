@@ -18,8 +18,8 @@ this.daily_cooldown_embed = (user, time) => {
 
 this.give_confirm_embed = (user, amount) => {
     const embed = new EmbedBuilder()
-        .setDescription(`🙅‍♂️ STOP! \`${user.username} \` should accept the handshake before continuing.\n⏳ Amount to recive **\`💲 ${amount} \`**`)
-        .setColor(`${attentionPurple}`)
+        .setDescription(`🙅‍♂️~WAIT! \`${user.username}\` should accept the handshake before.\nAmount to claim: **\`💲 ${amount} \`**`)
+        .setColor(`${twitterBlue}`)
     return embed
 }
 this.give_sucess_embed = (user, amount) => {

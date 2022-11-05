@@ -2,6 +2,7 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const { Client, IntentsBitField } = require("discord.js");
 const mongoose = require("mongoose");
+const { Player } = require('discord-player')
 require("dotenv").config();
 
 const myIntents = new IntentsBitField();
@@ -18,6 +19,12 @@ const client = new Client({ intents: myIntents });
 client.prefix = prefix;
 client.commands = new Discord.Collection();
 client.buttons = new Discord.Collection();
+client.player = new Player(client, {
+  ytdlOptions:{
+    quality:"highestaudio",
+    highWaterMark: 1 << 25
+  }
+})
 
 const commandFiles = [];
 

@@ -14,6 +14,7 @@ const User = new mongoose.Schema({
     channels: { type: Number, default: 0 },
     beg : { type: Date }
   },
+  perks:{type: Object, default: {}}
 });
 
 const Transactions = new mongoose.Schema({

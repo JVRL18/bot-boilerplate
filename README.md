@@ -66,6 +66,9 @@ Para abrir este projeto você necessita das seguintes ferramentas:
     * Bug fixes in kick commands.
     * Variable input1 at messageCreate changed to first element of args.
     * Added index.js
+* 0.4.0 - 05/11/2022
+    * Add experimental music [play] command
+    * Fix give command bugs
     
 ## 📋 Licença/License
 
