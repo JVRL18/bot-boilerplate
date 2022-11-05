@@ -25,5 +25,8 @@
   ],
   "check": [
     "check"
+  ],
+  "clear": [
+    "clear"
   ]
 }

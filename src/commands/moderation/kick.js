@@ -1,11 +1,38 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const { kick } = require("../../assets/embeds/moderation");
-const { confirm } = require("../../assets/components/confirm");
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+  ComponentType,
+} = require("discord.js");
+const { kick, kicked } = require("../../assets/embeds/moderation");
+const { confirm } = require("../../assets/buttons/confirm");
+const { noPerm } = require("../../assets/embeds/global");
 
-const code = async (user, reason, i) => {
-  
-  await i.reply({ embeds:[kick(user, reason)], components:[confirm()] });
+const code = async (member, reason, i) => {
+  if (!i.member.permissions.has(PermissionFlagsBits.KickMembers))
+    return await i.reply({ embeds: [noPerm()] });
 
+  let user = member.user;
+
+  await i.reply({
+    embeds: [kick(user, reason)],
+    components: [confirm()],
+  });
+
+  const collector = i.channel.createMessageComponentCollector({
+    ComponentType: ComponentType.Button,
+    max: 1,
+  });
+  collector.on("collect", async (k) => {
+    if (i.member.id !== k.user.id)
+      return k.reply({ contet: "It itsn't your button." });
+    if (k.customId === "yep") {
+      k.update({
+        embeds: [kicked(user, reason)],
+        components: [],
+      });
+      member.kick(reason);
+    }
+  });
 };
 
 module.exports = {
@@ -13,29 +40,34 @@ module.exports = {
     .setName("kick")
     .setDescription("Kick an user")
     .addUserOption((opt) =>
-      opt.setName("user").setDescription("Choose the user to kick")
+      opt
+        .setName("user")
+        .setDescription("Choose the user to kick")
+        .setRequired(true)
     )
     .addStringOption((option) =>
       option.setName("reason").setDescription("The reason for kicking")
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
     .setDMPermission(false),
-  run: async (interaction, client) => {
-    const user = interaction.options.getUser("user") || interaction.member.user;
+  run: async (interaction, client, typo) => {
+    const user = interaction.options.getUser("user");
     const reason = interaction.options.getString("reason") ?? "Not specified.";
 
     code(user, reason, interaction);
   },
-  execute: async (message, client, input1, inputs, typo) => {
-    if(!inputs[0]) return message.reply({ content: "You must provide a user." })
+  execute: async (message, client, input1, args, typo) => {
+    if (!args[0]) return message.reply({ content: "You must provide a user." });
 
-    const kicked = inputs[0].slice(2, inputs[0].length - 1)
-    const user = await client.users.cache.get(kicked)
-    
-    if(user === undefined) return message.reply({ content: "You must provide a valid user."})
-    
-    const reason = inputs[1] === undefined ? 'Not specified' : inputs[1]
-    code(user, reason, message);
+    let membro =
+      message.mentions.members.first() ||
+      message.guild.members.cache.get(args[0]);
+
+    if (!membro)
+      return message.reply({ content: "You must provide a valid user." });
+
+    const reason =
+      args[1] === undefined ? "Not specified" : args.slice(1).join(" ");
+    code(membro, reason, message);
   },
 };
- 
