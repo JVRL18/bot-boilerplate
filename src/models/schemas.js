@@ -16,6 +16,10 @@ const User = new mongoose.Schema({
   },
 });
 
+const Transactions = new mongoose.Schema({
+  total:{type: Number, unique: true, required: true, default: 0}
+})
+
 const Guild = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
   owner: { type: String, unique: true, required: true },
@@ -69,4 +73,5 @@ module.exports = {
   Guild: mongoose.model("Guild", Guild),
   Channel: Channel,
   Test: mongoose.model("Test", Test),
+  Transactions: mongoose.model("Transactions", Transactions)
 };

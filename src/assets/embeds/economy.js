@@ -67,7 +67,7 @@ this.success_give_transaction = (sender, reciver, amount) => {
     const transactionId = 0
     const embed = new EmbedBuilder()
         .setColor(spotifyGreen)
-        .setDescription(`🔎 Transaction id:#${transactionId}\n💰 \`${senderName}\` Gave: \`💸 +${amount}${coinName}\` To: \`${reciverName} ✅\``)
+        .setDescription(`🔎 Transaction id:#${transactionId}\n💰 \`😁 ${senderName}\` Gave: \`💸${amount} \` To: \`🤑 ${reciverName} \``)
 
     return embed
 }
