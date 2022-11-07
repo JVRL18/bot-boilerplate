@@ -69,6 +69,9 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 * 0.4.0 - 05/11/2022
     * Add experimental music [play] command
     * Fix give command bugs
+* 0.4.1 - 07/11/2022
+    * Add optin to checking users via slash in [check] command
+    * Add new data model for transactions ids
     
 ## 📋 Licença/License
 

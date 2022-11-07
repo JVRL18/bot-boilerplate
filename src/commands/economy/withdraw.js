@@ -3,14 +3,14 @@ const { User } = require('../../models/schemas')
 const { justAText, embed_404_error_message } = require('../../assets/embeds/global')
 const { sucess_withdraw_transaction } = require('../../assets/embeds/economy')
 
-const code = (user, userData, where, amount) => {
+const code = async (user, userData, where, amount) => {
     if(userData.bank < amount) return where.reply({embeds:[embed_404_error_message(`You do not have this much on bank, bank money: \`${userData.bank}💸\``)], ephemeral:true})
 
     userData.bank -= amount
     userData.wallet += amount
     userData.save()
 
-    return where.reply({embeds:[sucess_withdraw_transaction(amount)]})
+    return where.reply({embeds:[await sucess_withdraw_transaction(amount)]})
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js")
-
+const { Transactions } = require("../../models/schemas")
 const [spotifyGreen, twitterBlue, softRed, sucessYellow, attentionPurple] = ['#1DB954', '#1DA1F2', '#de3f44', 'e6cc00', '#db23bc']
 
 this.daily_sucess_embed = (user, amount) => {
@@ -58,26 +58,33 @@ this.cooldown_timer = (text) => {
     return embed
 }
 
-this.success_give_transaction = (sender, reciver, amount) => {
+this.success_give_transaction = async (sender, reciver, amount) => {
+    const transaction_general = await Transactions.findOne({id:007}) || new Transactions({id:007, total:0}) 
+    transaction_general.total++
+    transaction_general.save()
+    const transactionId = transaction_general.total
+
     const senderNewBal = sender.bal
     const senderName = sender.username
     const reciverNewBal = reciver.bal
     const reciverName = reciver.username
     const coinName = `coinName`
-    const transactionId = 0
     const embed = new EmbedBuilder()
         .setColor(spotifyGreen)
-        .setDescription(`🔎 Transaction id:#${transactionId}\n💰 \`😁 ${senderName}\` Gave: \`💸${amount} \` To: \`🤑 ${reciverName} \``)
+        .setDescription(`🔎 Transaction \`id:#${transactionId}\`\n💰 \`😁 ${senderName}\` Gave: \`💸${amount} \` To: \`🤑 ${reciverName} \``)
 
     return embed
 }
 
-this.sucess_withdraw_transaction = (amount) => {
-    const transactionId = 0
+this.sucess_withdraw_transaction = async (amount) => {
+    const transaction_general = await Transactions.findOne({id:007}) || new Transactions({id:007, total:0}) 
+    transaction_general.total++
+    transaction_general.save()
+    const transactionId = transaction_general.total
 
     const embed = new EmbedBuilder()
         .setColor(spotifyGreen)
-        .setDescription(`🔎 Transaction id:#${transactionId}\n💰 Value: \`${amount}💸\``)
+        .setDescription(`🔎 Transaction \`id:#${transactionId}\`\n💰 Value: \`${amount}💸\``)
 
     return embed
 }

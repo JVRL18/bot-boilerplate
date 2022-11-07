@@ -111,31 +111,26 @@ const {
 } = require("../../assets/embeds/global");
 const { unite_profile_embed } = require("../../assets/embeds/unite_api");
 
-const code = async (where, client, name) => {
-  const msg = await where.reply({ embeds: [await_fetching()] });
+const code = async (where, client, name, typo) => {
+  const botmsg = await where.reply({ embeds: [await_fetching()], fetchReply:true });
+
   let infos = await getPlayer(name);
-  if (infos === undefined) return msg.edit({ embeds: [embed_404_user(name)] });
-  const b = "```";
-  return msg.edit({ embeds: [await unite_profile_embed(infos)] });
+  if (infos === undefined) return botmsg.edit({ embeds: [embed_404_user(name)] });
+  return botmsg.edit({ embeds: [await unite_profile_embed(infos)] });
 };
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("check")
     .setDescription("Get pokemon unite info about choosen user")
-    .addUserOption((option) =>
-      option.setName("user").setDescription("Person who you want to check")
+    .addStringOption((option) =>
+      option.setName("user").setDescription("Person who you want to check").setRequired(true)
     ),
   run: (interaction, client, typo) => {
-    interaction.reply({
-      embeds: [
-        embed_404_error_message(
-          `This command is actually set to be only text, try again using \`${client.prefix}check <user>\` `
-        ),
-      ],
-    });
+    code(interaction,client, interaction.options.getString("user"), typo)
+
   },
-  execute: (message, client, input1, typo) => {
-    code(message, client, input1);
+  execute: (message, client, input1, inputs, typo) => {
+    code(message, client, input1,typo);
   },
 };

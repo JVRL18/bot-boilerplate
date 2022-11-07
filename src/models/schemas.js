@@ -18,7 +18,8 @@ const User = new mongoose.Schema({
 });
 
 const Transactions = new mongoose.Schema({
-  total:{type: Number, unique: true, required: true, default: 0}
+  id:{type: Number, unique: true, required: true, default:007},
+  total:{type: Number, unique: true, default: 0}
 })
 
 const Guild = new mongoose.Schema({
