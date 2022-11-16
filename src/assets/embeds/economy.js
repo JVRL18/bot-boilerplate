@@ -4,7 +4,7 @@ const [spotifyGreen, twitterBlue, softRed, sucessYellow, attentionPurple] = ['#1
 
 this.daily_sucess_embed = (user, amount) => {
     const embed = new EmbedBuilder()
-        .setDescription(`**Welcome back ${user.username}!**, **\`💲 ${amount} \`** was deposited in your bank account.`)
+        .setDescription(`**Welcome back ${user.username}! 👋**\n> **\`💲 ${amount} \`** was placed in your wallet.`)
         .setColor(spotifyGreen)
         .setAuthor({name:`${user.username}'s daily payout`,iconURL:`${user.displayAvatarURL()}`})
     return embed
@@ -91,22 +91,8 @@ this.sucess_withdraw_transaction = async (amount) => {
 this.balanceEmbed = (user, userData) => {
     const balance = new EmbedBuilder()
         .setAuthor({ name: `${user.username}'s balance`, iconURL: `${user.displayAvatarURL()}` })
-        .setDescription('Total is just the sum wallet + bank.')
+        .setDescription(`🔸 Wallet: **\`💲 ${userData.wallet} \`**\n🔸 Bank: **\`💲 ${userData.bank} \`**\n🔸 Net: **\`💲 ${userData.bank + userData.wallet} \`**`)
         .setColor(sucessYellow)
-        .addFields({
-            name: '🔸 Wallet',
-            value: `**\`💲 ${userData.wallet} \`**`,
-            inline: true
-        })
-        .addFields({
-            name: '🔸 Bank',
-            value: `**\`💲 ${userData.bank} \`**`,
-            inline: true
-        })
-        .addFields({
-            name: '🔸 Total',
-            value: `**\`💲 ${userData.bank + userData.wallet} \`**`
-        })
 
     return balance
 }

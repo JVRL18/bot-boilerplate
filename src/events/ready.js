@@ -35,6 +35,8 @@ module.exports = {
 
     if (commandArgs) {
       const commands = [...client.commands].map(x => x[1].data)
+      await client.application.commands.set(commands)
+      return console.log('[!] Commands set globally');
 
       if (commandArgs.startsWith("local=")) {
         await client.guilds.fetch(commandArgs.split("=")[1]).then(async guild => await guild.commands.set(commands))

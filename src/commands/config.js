@@ -6,8 +6,8 @@ const { User, Guild } = require('../models/schemas')
 const code = async (user, Guild, client, where) => {
     Guild.save()
     const guild = where.guild
-    const filter = i => i.user.id === Guild.owner
-    if (user.id !== where.guild.ownerId) return where.reply({ content: 'Cant do that', ephemeral: true })
+    const filter = i => i.user.id === "429771320964939787"
+    //if (user.id !== where.guild.ownerId) return where.reply({ content: 'Cant do that', ephemeral: true })
     let msg
     msg = await where.reply({ content: 'menu opening', components: [config_menu()], embeds: [await guildOverView(guild, user)] })
 

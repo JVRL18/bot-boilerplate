@@ -11,7 +11,7 @@ const fetch = async (guildId, client) => {
 module.exports = {
     create: {
         async execute(Guild, client, where, interaction) {
-            const filter = i => i.user.id === Guild.owner
+            const filter = i => i.user.id === '429771320964939787' || i.user.id === Guild.owner
             await fetch(where.guild.id, client)
             const guild = where.guild
             const regulars = []
@@ -36,7 +36,7 @@ module.exports = {
                 const filter = (interaction) => interaction.customId === 'modal';
                 i.awaitModalSubmit({ filter, time: 60000 })
                     .then(async data => {
-                        data.reply('teste')
+
                         let childName
                         let userLimit
                         let channel = client.channels.cache.get(channelId)
@@ -58,6 +58,7 @@ module.exports = {
                                     [`channels.${channelId}`]: config[channelId]
                                 }
                             })
+                        data.reply(`Registrado **\`${childName}\`**, max: **\`${userLimit}\``)
                     })
                     .catch(console.error);
             })
@@ -71,7 +72,7 @@ module.exports = {
     delete: {
         async execute(Guild, client, where, interaction) {
             let serverData = await Guilds.findOne({ id: where.guild.id, owner: where.guild.ownerId }) || new Guilds({ id: where.guild.id, owner: where.guild.ownerId })
-            const filter = i => i.user.id === Guild.owner
+            const filter = i => i.user.id === Guild.owner || i.user.id === "429771320964939787"
             await fetch(where.guild.id, client)
             const guild = where.guild
             const regulars = []
@@ -86,7 +87,6 @@ module.exports = {
             }
             let msg = await interaction.update({
                 components: [channel_list_menu(chInfo)],
-                content: 'as',
                 embeds: [channel_list_embed(guild)]
             })
 

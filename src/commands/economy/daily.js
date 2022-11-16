@@ -10,7 +10,7 @@ const code = (user, userData, where) => {
     }
 
     const amount = 395
-    userData.bank += amount
+    userData.wallet += amount
     userData.cooldowns.daily = Date.now() + (1000 * 60 * 60 * 12)
     userData.save()
 

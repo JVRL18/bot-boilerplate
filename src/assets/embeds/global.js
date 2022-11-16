@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-
+const [spotifyGreen, twitterBlue, softRed, sucessYellow, attentionPurple] = ['#1DB954', '#1DA1F2', '#de3f44', 'e6cc00', '#db23bc']
 const pallete = "#7600bc";
 const loadingURL =
   "https://cdn.dribbble.com/users/2105727/screenshots/4254712/getting_ready.gif";
@@ -38,7 +38,7 @@ this.await_fetching = (what) => {
 
 this.embed_404_error_message = (text) => {
   const embed = new EmbedBuilder()
-    .setColor("FF0000")
+    .setColor(softRed)
     .setDescription(`❌ Ops, ${text}.`);
 
   return embed;
