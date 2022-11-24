@@ -5,9 +5,15 @@ const { embed_404_error_message } = require('../../assets/embeds/global')
 const { User } = require('../../models/schemas')
 
 const code = async (user, userData, where, client, reciver, reciverData, amount) => {
-    if (userData.wallet < amount) return where.reply({ embeds: [embed_404_error_message(`sorry, you don't have enough, actual: \`${userData.wallet}\``)] })
+    if (userData.wallet < amount) return where.reply({
+         embeds: [embed_404_error_message(`sorry, you don't have enough, actual: \`${userData.wallet}\``)] 
+        })
 
-    const msg = await where.reply({ content: `||<@${reciver.id}>||`, embeds: [give_confirm_embed(reciver, amount)], components: [give_confirm_button()] })
+    const msg = await where.reply({
+         content: `||<@${reciver.id}>||`, embeds: [give_confirm_embed(reciver, amount)], 
+         components: [give_confirm_button()] 
+        })
+        
     const filter = i => {
         if (i.customId === 'yes' && i.user.id === user.id) return
         return i.user.id === user.id || i.user.id === reciver.id
@@ -31,14 +37,14 @@ const code = async (user, userData, where, client, reciver, reciverData, amount)
                     },
                     amount
                 )],
-                components:[]
+                components: []
             })
         }
         if (i.customId === 'no') {
             return await i.update({
-                content:'',
+                content: '',
                 embeds: [give_fail_embed('user')],
-                components:[]
+                components: []
             })
         }
     })

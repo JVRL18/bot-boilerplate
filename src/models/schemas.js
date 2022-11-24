@@ -7,26 +7,30 @@ const Test = new mongoose.Schema({
 
 const User = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
-  wallet: { type: Number, default: 0 },
+  ticketOpen: {type: Boolean, default:false},
+  tickets: {type: Number, default:0 },
+  wallet: { type: Number, default:0 },
   bank: { type: Number, default: 0 },
   cooldowns: {
     daily: { type: Date },
     channels: { type: Number, default: 0 },
-    beg : { type: Date }
+    beg: { type: Date }
   },
-  perks:{type: Object, default: {}}
+  perks: { type: Object, default: {} }
 });
 
 const Transactions = new mongoose.Schema({
-  id:{type: Number, unique: true, required: true, default:007},
-  total:{type: Number, unique: true, default: 0}
+  id: { type: Number, unique: true, required: true, default: 007 },
+  total: { type: Number, unique: true, default: 0 }
 })
 
 const Guild = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
-  owner: { type: String, unique: true, required: true },
+  owner: { type: String, unique: true },
+  ticketChannel: { type:Object, default: {} },
+  openTickets: {type: Array, default: []},
+  openTicketSource: {type: Object, default:{}},
   channels: { type: Object, default: {} },
-  vipRoles: { type: Object, default: {} },
   admins: { type: Object, default: {} },
 });
 

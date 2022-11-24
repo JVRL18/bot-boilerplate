@@ -4,7 +4,7 @@
   "description": "betterbot boilerplate",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js global"
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",

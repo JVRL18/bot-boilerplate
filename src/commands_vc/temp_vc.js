@@ -29,7 +29,7 @@ module.exports = {
                     break
                 }
             }
-            console.log(child)
+
             const newChannel = await newState.guild.channels.create({
                 name: child.name,
                 type: child.type,
@@ -37,7 +37,8 @@ module.exports = {
                 parent: child.parent,
                 userLimit: child.userLimit
             })
-            serverData.save()
+
+            await serverData.save()
         
             let i = 0
             for (const [, member] of channel.members) {

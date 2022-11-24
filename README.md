@@ -72,13 +72,26 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 * 0.4.1 - 07/11/2022
     * Add option to checking users via slash in [check] command
     * Add new data model for transactions ids
-* 0.4.2 - 08/11/2022
+* 1.0.0 - 24/11/2022
     [New]
+    * Tickets command added at config.js
     * Model for perk creationg
     * Rob command
-    [System changes]
+    * Music commands: [STOP, SKIP, SHUFFLE, QUEUE]
+    [System_changes]
+    * Code refactored in general
+    * [crud] folder created inside configs for CRUD commands.
+    * [Commands_fixed] && [events_custom] created for holding fixed commands, like ticket button.
+    * Now index.js exports the client as client_main
+    * Now command loader ignores "_embeds.js" files
     * Economy embeds changed
     * Daily command now adds to wallet instead of Bank
+    * Perks, Transactions, guilds, User schemas added/changed
+    [Deleted]
+    * Owner Crud folder deleted
+    [Comments]
+    * Recomended to use new structure for new commands: New folder with the command name with a '_embeds.js' file inside and also a command file that has the same name as the folder.
+
 ## 📋 Licença/License
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">INTELI, VICTOR BRUNO ALEXANDER ROSETTI DE QUIROZ</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>

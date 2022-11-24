@@ -3,6 +3,7 @@ Only for terminal developer thing
 */
 
 const fs = require('fs')
+console.log(fs)
 const input = require('readline-sync')
 
 let addAlt = () => {

@@ -20,12 +20,20 @@ this.guildOverView = async (guild, user) => {
         })
     } else {
         for (key of Object.keys(channels)) {
-            const child = channels[`${key}`].configs
-            embed.addFields({
-                name: `${channels[`${key}`].name}`,
-                value: `${types[channels[`${key}`].type]}\n💬 Temp name: \`${child.name}\`\n📞 Max users: \`${child.userLimit}\``,
-                inline: true
-            })
+            if(key === 'tickets'){
+                embed.addFields({
+                    name: `Tickets Channel`,
+                    value: `Category: \`**${channels[`${key}`].name}**\``,
+                    inline: true
+                })
+            }else{
+                const child = channels[`${key}`].configs
+                embed.addFields({
+                    name: `${channels[`${key}`].name}`,
+                    value: `${types[channels[`${key}`].type]}\n💬 Temp name: \`${child.name}\`\n📞 Max users: \`${child.userLimit}\``,
+                    inline: true
+                })
+            }
         }
     }
 
@@ -36,6 +44,15 @@ this.voice_config_page = (guild) => {
     const embed = new EmbedBuilder()
         .setTitle(`🔸 ${guild.name} 🔸\n**\`Configs/voice\`** `)
         .setDescription('Select one of existing types of voice configurations')
+        .setThumbnail(guild.iconURL())
+
+    return embed
+}
+
+this.text_config_page = (guild) => {
+    const embed = new EmbedBuilder()
+        .setTitle(`🔸 ${guild.name} 🔸\n**\`Configs/text\`** `)
+        .setDescription('Select one of existing types of text configurations')
         .setThumbnail(guild.iconURL())
 
     return embed

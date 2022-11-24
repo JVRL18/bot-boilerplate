@@ -40,5 +40,17 @@
   ],
   "cmds": [
     "cmds"
+  ],
+  "queue": [
+    "queue"
+  ],
+  "shuffle": [
+    "shuffle"
+  ],
+  "skip": [
+    "skip"
+  ],
+  "stop": [
+    "stop"
   ]
 }

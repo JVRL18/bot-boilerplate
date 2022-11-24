@@ -1,9 +1,9 @@
-const fs = require("fs");
-const Discord = require("discord.js");
-const { Client, IntentsBitField } = require("discord.js");
-const mongoose = require("mongoose");
+const { Client, IntentsBitField, Collection } = require("discord.js");
+const { token, MONGO_URI, prefix } = require("./config.json");
 const { Player } = require('discord-player')
-require("dotenv").config();
+const { connect } = require("mongoose");
+const { readdirSync } = require("fs");
+const { loadEvents } = require('./configs/utils/botLoad')
 
 const myIntents = new IntentsBitField();
 myIntents.add(
@@ -13,39 +13,34 @@ myIntents.add(
   IntentsBitField.Flags.MessageContent,
   IntentsBitField.Flags.GuildVoiceStates
 );
-const { token, MONGO_URI, prefix } = require("./config.json");
 
 const client = new Client({ intents: myIntents });
 client.prefix = prefix;
-client.commands = new Discord.Collection();
-client.buttons = new Discord.Collection();
+client.commands = new Collection();
 client.player = new Player(client, {
-  ytdlOptions:{
-    quality:"highestaudio",
+  ytdlOptions: {
+    quality: "highestaudio",
     highWaterMark: 1 << 25
   }
 })
 
+//commands loader
 const commandFiles = [];
-
 (findCommands = async (path = "commands") => {
-  fs.readdirSync(`./src/${path}`).filter(async (file) => {
+  readdirSync(`./src/${path}`).filter(async (file) => {
     if (file === "aliases") return;
+    if (file === "_embeds.js") return;
     if (file.endsWith(".js")) return commandFiles.push(file);
     findCommands(path + `/${file}`);
   });
 })();
-
-const eventFiles = fs
-  .readdirSync("./src/events")
-  .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
   let commander;
   const getCommands = (name, path = "commands") => {
     const dirr = `./src/${path}`;
 
-    fs.readdirSync(dirr).filter((find) => {
+    readdirSync(dirr).filter((find) => {
       if (find === name) {
         commander = `./${path}/${find}`;
       } else {
@@ -63,6 +58,10 @@ for (const file of commandFiles) {
     command
   );
 }
+
+//normal events loader
+const eventFiles = readdirSync("./src/events")
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of eventFiles) {
   const event = require(`./events/${file}`);
@@ -87,10 +86,16 @@ for (const file of eventFiles) {
   }
 }
 
-client.login(token).then(async () => {
-  console.log("Bot Status: ONLINE\n");
-  await mongoose.connect(MONGO_URI || "", {
-    keepAlive: true,
-  });
-  console.log("\nDataBase connected.");
-});
+client.login(token)
+  .then(async () => {
+    console.log(`[!] Bot Status: ONLINE\n`)
+
+    //export client for acessing into events_custom and loading.
+    module.exports = client
+    loadEvents(client)
+    
+    await connect(MONGO_URI || "", { keepAlive: true })
+      .then(res => console.log("\n[!] DataBase status: ONLINE\n"))
+      .catch(err => console.log("DataBase login err: " + err))
+  })
+  .catch(err => console.log("Bot login err: " + err))

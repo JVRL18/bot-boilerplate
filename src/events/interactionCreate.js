@@ -1,3 +1,6 @@
+const { Guild, Channel } = require('../models/schemas')
+const Guilds = Guild
+
 module.exports = {
   name: "interactionCreate",
   async execute(interaction, client = interaction.client, typo) {

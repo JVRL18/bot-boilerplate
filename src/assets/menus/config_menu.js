@@ -42,6 +42,26 @@ this.voice_config_menu = () => {
     return row
 }
 
+this.text_config_menu = () => {
+    const row = new ActionRowBuilder()
+    .addComponents(
+        new SelectMenuBuilder()
+            .setCustomId('select')
+            .setPlaceholder('Select one')
+            .addOptions(
+                {
+                    label: 'Ticket channel',
+                    description: 'Configure a channel to start tickets',
+                    emoji:'📨',
+                    value: 'ticket',
+                }
+            ),
+    );
+    return row
+}
+
+
+
 
 this.add_remove_edit_menu = () => {
     const row = new ActionRowBuilder()

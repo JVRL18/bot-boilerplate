@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { justAText } = require("../assets/embeds/global.js");
+const { readFileSync } = require("fs");
+const { embed_404_error_message } = require("../assets/embeds/global");
 
 module.exports = {
   name: "messageCreate",
@@ -13,7 +13,7 @@ module.exports = {
     //Register commands on load
     const checkCommandAlts = (info) => {
       let alts = JSON.parse(
-        fs.readFileSync("./src/commands/aliases/cmds.json")
+        readFileSync("./src/commands/aliases/cmds.json")
       );
       for (key in alts) {
         if (alts[key].indexOf(info) !== -1) {
@@ -29,18 +29,10 @@ module.exports = {
 
     //Suggestion system when command spelling is wrong
     if (!client.commands.has(commandName)) {
-      let finder = {};
-      let fixnames = [];
-      const commands = fs.readdirSync("./src/commands");
-      for (key in commands) {
-        fixnames.push(
-          commands[key]
-            .split("")
-            .splice(0, commands[key].length - 3)
-            .reduce((x, y) => (x += y), "")
-        );
-      }
-      for (comando of fixnames) {
+      let [found, finder, name] = [0, {}]
+      const commands = Object.keys(JSON.parse(readFileSync("./src/commands/aliases/cmds.json")))
+
+      for (comando of commands) {
         finder[comando] = 0;
         for (letra of comando) {
           if (msg.indexOf(letra) !== -1) {
@@ -48,31 +40,21 @@ module.exports = {
           }
         }
       }
-      let name = "";
-      let bigger = 0;
-      for (key in finder) {
-        if (finder[key] > bigger) {
-          bigger = finder[key];
-          name = [key];
-        }
-      }
+      Object.entries(finder).map(e => e[1] > found ? [found, name] = [e[1], e[0]] : '')
+
       return message.channel.send({
         embeds: [
-          justAText(
-            `❌ Command not found!\n🎈 did you mean ${client.prefix}${
-              name === "" ? "comandos" : name
-            }?\n\n⭐Dica: acesse ${client.prefix}comandos`,
-            "#B026FF"
-          ),
+          embed_404_error_message(
+            `command not found! Try \`${client.prefix}${name === "" ? "comandos" : name}\` `),
         ],
       });
-    }
-
-    const command = client.commands.get(commandName);
-    try {
-      command.execute(message, client, input1, args, typo);
-    } catch (err) {
-      console.log(err);
+    } else {
+      const command = client.commands.get(commandName);
+      try {
+        command.execute(message, client, input1, args, typo);
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
 };

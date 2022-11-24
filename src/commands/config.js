@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, SelectMenuInteraction } = require('discord.js')
-const { guildOverView, voice_config_page, add_remove_edit_page } = require('../assets/embeds/configs')
-const { config_menu, voice_config_menu, add_remove_edit_menu } = require('../assets/menus/config_menu')
+const { guildOverView, voice_config_page, add_remove_edit_page, text_config_page } = require('../assets/embeds/configs')
+const { config_menu, voice_config_menu, add_remove_edit_menu, text_config_menu} = require('../assets/menus/config_menu')
 const { User, Guild } = require('../models/schemas')
 
 const code = async (user, Guild, client, where) => {
@@ -9,7 +9,7 @@ const code = async (user, Guild, client, where) => {
     const filter = i => i.user.id === "429771320964939787"
     //if (user.id !== where.guild.ownerId) return where.reply({ content: 'Cant do that', ephemeral: true })
     let msg
-    msg = await where.reply({ content: 'menu opening', components: [config_menu()], embeds: [await guildOverView(guild, user)] })
+    msg = await where.reply({ components: [config_menu()], embeds: [await guildOverView(guild, user)] })
 
     const collector = msg.createMessageComponentCollector({ time: 60000, filter })
     collector.on('collect', async i => {
@@ -30,6 +30,34 @@ const code = async (user, Guild, client, where) => {
                         if(int.values[0] === 'create'){
                             event.create.execute(Guild, client, where, int)
                         }
+                        if(int.values[0] === 'delete'){
+                            event.delete.execute(Guild, client, where, int)
+                        }
+                        
+                    })
+                }
+
+            })
+        }
+
+        if(i.values[0] === 'tc'){
+            msg = await i.update({ components: [text_config_menu()], embeds: [text_config_page(guild)] })
+
+            const collector = msg.createMessageComponentCollector({ filter, time:6000})
+            collector.on('collect', async i => {
+                
+                if(i.values[0] === 'ticket'){
+                    msg = await i.update({components:[add_remove_edit_menu()], embeds:[add_remove_edit_page(guild)]})
+                    const collector = msg.createMessageComponentCollector({ time:60000, filter})
+                    
+                    collector.on('collect', async int => {
+                        console.log(int.values[0])
+                        const event = require('../configs/crud/text_crud')
+
+                        if(int.values[0] === 'create'){
+                            event.create.execute(Guild, client, where, int)
+                        }
+
                         if(int.values[0] === 'delete'){
                             event.delete.execute(Guild, client, where, int)
                         }

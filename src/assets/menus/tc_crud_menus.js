@@ -1,12 +1,12 @@
-const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
+const { ActionRowBuilder, Events, SelectMenuBuilder } = require('discord.js');
 
-this.channel_list_menu = (channels = []) => {
+this.category_list_menu = (channels = []) => {
     
     const row = new ActionRowBuilder()
     .addComponents(
         new SelectMenuBuilder()
             .setCustomId('select')
-            .setPlaceholder('Select a channel')
+            .setPlaceholder('Select a category')
             .addOptions(channels),
     );
 
