@@ -72,25 +72,28 @@ Para abrir este projeto você necessita das seguintes ferramentas:
 * 0.4.1 - 07/11/2022
     * Add option to checking users via slash in [check] command
     * Add new data model for transactions ids
-* 1.0.0 - 24/11/2022
-    [New]
-    * Tickets command added at config.js
-    * Model for perk creationg
-    * Rob command
-    * Music commands: [STOP, SKIP, SHUFFLE, QUEUE]
-    [System_changes]
-    * Code refactored in general
-    * [crud] folder created inside configs for CRUD commands.
-    * [Commands_fixed] && [events_custom] created for holding fixed commands, like ticket button.
-    * Now index.js exports the client as client_main
-    * Now command loader ignores "_embeds.js" files
-    * Economy embeds changed
-    * Daily command now adds to wallet instead of Bank
-    * Perks, Transactions, guilds, User schemas added/changed
-    [Deleted]
-    * Owner Crud folder deleted
-    [Comments]
-    * Recomended to use new structure for new commands: New folder with the command name with a '_embeds.js' file inside and also a command file that has the same name as the folder.
+* `1.0.0 - 24/11/2022`
+    * <details><summary>NEW</summary>
+
+        * Tickets command added at config.js
+        * Model for perks creation
+        * Rob command
+        * Music commands: [STOP, SKIP, SHUFFLE, QUEUE]
+    * <details><summary>System changes</summary>
+
+        * Code refactored in general
+        * `crud folder created` inside configs for CRUD commands.
+        * `Commands_fixed && events_custom folders` created for holding fixed commands, like ticket button.
+        * Now index.js `exports` the client
+        * Now command loader ignores "_embeds.js" files
+        * Economy embeds changed
+        * Daily command now adds to wallet instead of Bank
+        * Perks, Transactions, guilds, User `schemas added/changed`
+    * <details><summary>New command structure</summary>
+
+        * Recomended to use new structure for new commands: `New folder` using the `command name` with a `'_embeds.js' file inside` and also a command file that has the same name as the folder.
+
+    </details>
 
 ## 📋 Licença/License
 
