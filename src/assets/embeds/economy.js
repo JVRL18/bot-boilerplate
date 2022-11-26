@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js")
 const { Transactions } = require("../../models/schemas")
-const [spotifyGreen, twitterBlue, softRed, sucessYellow, attentionPurple] = ['#1DB954', '#1DA1F2', '#de3f44', 'e6cc00', '#db23bc']
+const [spotifyGreen, twitterBlue, softRed, sucessYellow, attentionPurple, off] = ['#1DB954', '#1DA1F2', '#de3f44', 'e6cc00', '#db23bc', '#2F3136']
 
 this.daily_sucess_embed = (user, amount) => {
     const embed = new EmbedBuilder()

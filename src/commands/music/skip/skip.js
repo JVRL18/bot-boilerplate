@@ -1,16 +1,14 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { skip } = require("../../assets/embeds/music");
-
+const { skip_song_embed } = require("./_embeds")
 const code = async (i, client) => {
-    const queue = client.player.getQueue(i.guildId)
+    const { player } = require('../../../index')
 
-    if(!queue) return await i.reply({ content: "Doesn't have any music on playlist" })
+    const queue = player.getQueue(i.guildId)
 
-    const currentSong = queue.current;
+    if (!queue) return await i.reply({ content: "Doesn't have any music on playlist", ephemeral:true })
 
     queue.skip()
-    const embed = await skip(currentSong)
-    await i.reply({ embeds: [embed] })
+    await i.reply({ embeds: [skip_song_embed(queue.current, i.user)] })
 }
 
 module.exports = {

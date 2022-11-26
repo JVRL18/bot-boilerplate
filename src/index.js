@@ -3,7 +3,7 @@ const { token, MONGO_URI, prefix } = require("./config.json");
 const { Player } = require('discord-player')
 const { connect } = require("mongoose");
 const { readdirSync } = require("fs");
-const { loadEvents } = require('./configs/utils/botLoad')
+const { loadEvents, loadPlayer } = require('./configs/utils/botLoad')
 
 const myIntents = new IntentsBitField();
 myIntents.add(
@@ -13,23 +13,25 @@ myIntents.add(
   IntentsBitField.Flags.MessageContent,
   IntentsBitField.Flags.GuildVoiceStates
 );
-
 const client = new Client({ intents: myIntents });
-client.prefix = prefix;
-client.commands = new Collection();
-client.player = new Player(client, {
+
+const player = new Player(client, {
   ytdlOptions: {
     quality: "highestaudio",
     highWaterMark: 1 << 25
   }
 })
 
+
+client.prefix = prefix;
+client.commands = new Collection();
+client.player = player
+
 //commands loader
 const commandFiles = [];
 (findCommands = async (path = "commands") => {
   readdirSync(`./src/${path}`).filter(async (file) => {
-    if (file === "aliases") return;
-    if (file === "_embeds.js") return;
+    if (file === "aliases" || file.startsWith('_')) return;
     if (file.endsWith(".js")) return commandFiles.push(file);
     findCommands(path + `/${file}`);
   });
@@ -45,7 +47,7 @@ for (const file of commandFiles) {
         commander = `./${path}/${find}`;
       } else {
         if (find.endsWith("js") === true) return;
-        if (find === "aliases") return;
+        if (find === "aliases" || find.startsWith("_")) return;
         return getCommands(name, path + `/${find}`);
       }
     });
@@ -88,14 +90,16 @@ for (const file of eventFiles) {
 
 client.login(token)
   .then(async () => {
-    console.log(`[!] Bot Status: ONLINE\n`)
-
-    //export client for acessing into events_custom and loading.
-    module.exports = client
+    console.log("\n\x1b[32m[!] Bot Status: ONLINE")
+    //exports client && player for acessing everywhere and not losing the types.
+    module.exports = {
+      client:client,
+      player:player
+    }
     loadEvents(client)
-    
+    loadPlayer()
     await connect(MONGO_URI || "", { keepAlive: true })
-      .then(res => console.log("\n[!] DataBase status: ONLINE\n"))
-      .catch(err => console.log("DataBase login err: " + err))
+      .then(res => console.log("\x1b[32m[!] DataBase status: ONLINE"))
+      .catch(err => console.log("\x1b[31mDataBase login err: " + err))
   })
-  .catch(err => console.log("Bot login err: " + err))
+  .catch(err => console.log("\x1b[31mBot login err: " + err))

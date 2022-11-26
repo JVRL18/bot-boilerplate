@@ -12,12 +12,14 @@
 -Raiz<br>
 |<br>
 |-->src<br>
-  &emsp;|-->assets<br>
-  &emsp;|-->commands<br>
-  &emsp;|-->events<br>
-  &emsp;|-->models<br>
-  &emsp;|index.js<br>
-|.env<br>
+  &emsp;|-->assets (aqui ficam as embeds , botões ou seja, a parte visual do bot (v0))<br>
+  &emsp;|-->commands (aqui ficam os comandos 2 em 1, slash e message, junto de suas embeds (v1)<br>
+  &emsp;|-->events (aqui fica uma "abstração" para os eventos event.on() no index, buscarem dentro dos commandos)<br>
+  &emsp;|-->events_custom (aqui ficam os eventos relacionados a canais fixos botões de registro/ticket) <br>
+  &emsp;|-->events_music (aqui ficam os eventos do discord player) <br>
+  &emsp;|-->models (aqui fica a estrutura de dados do bot na mongodb) <br>
+  &emsp;|-->configs (aqui ficam as conexões dos (eventos_<evento>) e o crud do banco de dados para registro de canais por select menu) <br>
+  &emsp;|index.js (arquivo principal, logins do bot e handlers)<br>
 |.gitignore<br>
 |package.json<br>
 |readme.md<br>
@@ -92,9 +94,30 @@ Para abrir este projeto você necessita das seguintes ferramentas:
     * <details><summary>New command structure</summary>
 
         * Recomended to use new structure for new commands: `New folder` using the `command name` with a `'_embeds.js' file inside` and also a command file that has the same name as the folder.
-
     </details>
+* `2.0.0 - 26/11/2022`
+    * MUSIC FEATURES
+    * <details><summary>NEW</summary>
 
+        * Play command added.
+        * `Shuffle, queue, pause, stop, skip, loop and pause` commands added.
+        * NEW schema for playlists in general.
+        * NEW folder `events_music` created for holding all discord-player `music events`.
+        * NEW "button" handler created at `interactionCreate` in `events_custom`.
+    </details>
+    * <details><summary>System changes</summary>
+
+        * `Tickets` events changed according to `fixed buttons rules` and moved to `commands_fixed/ticket`
+        * Guild schema changed to hold music features for individual guilds.
+        * User schema changed to hold private user music features data.
+        * Edited folder `commands_fixed` strucutre for holding all `fixed buttons` commands.
+        * old `music` commands refactored.
+    </details>
+    * <details><summary>REMOVED</summary>
+
+        * `unite_api` deleted.
+        * old `music assets` at `assets folder` deleted.
+    </details>
 ## 📋 Licença/License
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">INTELI, VICTOR BRUNO ALEXANDER ROSETTI DE QUIROZ</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>

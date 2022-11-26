@@ -3,8 +3,8 @@ const Guilds = Guild
 const { category_list_menu } = require('../../assets/menus/tc_crud_menus')
 const { channel_list_menu } = require('../../assets/menus/vc_crud_menus')
 const { tc_description_fields } = require('../../assets/modals/tc_crud_options')
-const { ticket_embed } = require('../../assets/embeds/ticket')
-const { new_ticket_button } = require('../../assets/buttons/ticket')
+const { ticket_embed } = require('../../commands_fixed/ticket/new_ticket/_embeds')
+const { new_ticket_button } = require('../../commands_fixed/ticket/new_ticket/_buttons')
 const { category_list_embed, channel_list_embed } = require('../../assets/embeds/tc_crud')
 
 const fetch = async (guildId, client) => {

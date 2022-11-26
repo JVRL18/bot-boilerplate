@@ -28,6 +28,7 @@ module.exports = {
             }
         }
     },
+
     loadEvents: (client) => {
         client.on("ready", () => {
             const files = readdirSync('./src/events_custom')
@@ -36,7 +37,21 @@ module.exports = {
                 require(`../../events_custom/${key}`)
             }
 
-            console.log("[!] Custom events loaded\n")
+            console.log(`\x1b[33m[!] [${files.length}] Custom events set`)
         })
+    },
+    
+    loadPlayer: () => {
+        const files = readdirSync('./src/events_music')
+        let ignored = 0
+        for (key of files) {
+            if(key.startsWith('_')) {
+                ignored++
+                continue
+            }
+            require(`../../events_music/${key}`)
+        }
+
+        console.log(`\x1b[33m[!] [${files.length - ignored}] Music events set`)
     }
 }

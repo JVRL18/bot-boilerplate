@@ -1,12 +1,11 @@
-const { delete_button } = require('../assets/buttons/ticket')
-const { ticket_popup_embed } = require('../assets/embeds/ticket')
-const { Guild, User } = require('../models/schemas')
-const Guilds = Guild
+const { delete_button } = require('./_buttons')
+const { ticket_popup_embed } = require('./_embeds')
+const { Guild, User } = require('../../../models/schemas')
 
 module.exports = {
-    new_ticket: async (interaction, client) => {
+    execute: async (interaction, client) => {
         if (!interaction.isButton()) return
-        const guildData = await Guilds.findOne({ id: interaction.guild.id }) || new Guilds({ id: interaction.guild.id })
+        const guildData = await Guild.findOne({ id: interaction.guild.id }) || new Guild({ id: interaction.guild.id })
         const userData = await User.findOne({ id: interaction.user.id }) || new User({ id: interaction.user.id })
         if (userData.ticketOpen) return message.reply({ content: "You already do have a ticket open", ephemeral: true })
 
@@ -49,27 +48,5 @@ module.exports = {
         //Embed de introdução do ticket
         newChannel.send({ embeds: [ticket_popup_embed(interaction.guild, undefined, newChannel.name)], components: [delete_button()] })
 
-    },
-    delete_ticket: async (interaction, client) => {
-        const guildData = await Guilds.findOne({ id: interaction.guild.id })
-        const userData = await User.findOne({ id: guildData.openTicketSource[interaction.channel.id] }) || new User({ id: guildData.openTicketSource[interaction.channel.id] })
-
-        await userData.updateOne({
-            "$set": {
-                ["ticketOpen"]: false
-            }
-        })
-
-        await guildData.updateOne({
-            "$unset": {
-                [`openTicketSource.${interaction.channel.id}`]: 1
-            }
-        })
-
-        const tickets = guildData.openTickets
-        guildData.openTickets.splice(tickets.indexOf(interaction.channel.id), 1)
-        await guildData.save()
-
-        await interaction.channel.delete()
     }
 }

@@ -7,8 +7,10 @@ const Test = new mongoose.Schema({
 
 const User = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
+
   ticketOpen: {type: Boolean, default:false},
   tickets: {type: Number, default:0 },
+
   wallet: { type: Number, default:0 },
   bank: { type: Number, default: 0 },
   cooldowns: {
@@ -16,8 +18,18 @@ const User = new mongoose.Schema({
     channels: { type: Number, default: 0 },
     beg: { type: Date }
   },
-  perks: { type: Object, default: {} }
+
+  perks: { type: Object, default: {} },
+
+  playlists:{type: Array, default:[] },
+  playHistory:{type: Array, default:[] }
+
 });
+
+const Playlists = new mongoose.Schema({
+  id: {type:String, unique:true, required:true },
+  listening:{type:Array, default:[]}
+})
 
 const Transactions = new mongoose.Schema({
   id: { type: Number, unique: true, required: true, default: 007 },
@@ -27,11 +39,18 @@ const Transactions = new mongoose.Schema({
 const Guild = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
   owner: { type: String, unique: true },
+
+  openTicketSource: {type: Object, default:{}},
   ticketChannel: { type:Object, default: {} },
   openTickets: {type: Array, default: []},
-  openTicketSource: {type: Object, default:{}},
+
   channels: { type: Object, default: {} },
   admins: { type: Object, default: {} },
+
+  musicChannel: {type: String, default: null},
+  tempMessage: {type: String, default: null},
+  isPlaying: {type: Boolean, default: false},
+  isPaused: {type: Boolean, default:false},
 });
 
 class Channel {
@@ -67,7 +86,7 @@ class Channel {
           position: this.position,
           parent: this.parent,
           userLimit: this.userLimit,
-        },
+        }
       },
     };
     return obj;
@@ -79,5 +98,6 @@ module.exports = {
   Guild: mongoose.model("Guild", Guild),
   Channel: Channel,
   Test: mongoose.model("Test", Test),
-  Transactions: mongoose.model("Transactions", Transactions)
+  Transactions: mongoose.model("Transactions", Transactions),
+  Playlists:mongoose.model("Playlists", Playlists)
 };
