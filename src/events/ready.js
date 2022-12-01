@@ -3,9 +3,10 @@ const { registerTextCommands } = require('../configs/utils/botLoad')
 module.exports = {
   name: "ready",
   once: true,
-  async execute(client) {
+  async execute(x) {
+    const { client } = require("../index")
     //register app commands
-    registerTextCommands()
+    await registerTextCommands()
 
     const commands = [...client.commands].map(x => x[1].data)
     await client.application.commands.set(commands)

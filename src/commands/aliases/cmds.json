@@ -1,9 +1,15 @@
 {
+  "cmds": [
+    "cmds"
+  ],
   "config": [
     "config"
   ],
   "balance": [
     "balance"
+  ],
+  "beg": [
+    "beg"
   ],
   "daily": [
     "daily"
@@ -14,32 +20,26 @@
   "give": [
     "give"
   ],
+  "rob": [
+    "rob"
+  ],
   "withdraw": [
     "withdraw"
-  ],
-  "kick": [
-    "kick"
-  ],
-  "ping": [
-    "ping"
-  ],
-  "check": [
-    "check"
   ],
   "clear": [
     "clear"
   ],
-  "beg": [
-    "beg"
+  "kick": [
+    "kick"
+  ],
+  "loop": [
+    "loop"
+  ],
+  "pause": [
+    "pause"
   ],
   "play": [
     "play"
-  ],
-  "rob": [
-    "rob"
-  ],
-  "cmds": [
-    "cmds"
   ],
   "queue": [
     "queue"
@@ -52,5 +52,32 @@
   ],
   "stop": [
     "stop"
+  ],
+  "ping": [
+    "ping"
+  ],
+  "google": [
+    "google"
+  ],
+  "embed": [
+    "embed"
+  ],
+  "gogle": [
+    "gogle"
+  ],
+  "autoplay": [
+    "autoplay"
+  ],
+  "playlist": [
+    "playlist"
+  ],
+  "favorites": [
+    "favorites"
+  ],
+  "button": [
+    "button"
+  ],
+  "register": [
+    "register"
   ]
 }

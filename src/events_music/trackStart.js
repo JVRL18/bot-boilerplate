@@ -1,9 +1,10 @@
-const { player, client } = require('../index.js')
 const { Guild } = require("../models/schemas")
 const { song_options_buttons, features_options_buttons } = require('./_buttons.js')
 const { new_track_embed } = require('./_embeds')
+const { player } = require('../index.js')
 
 player.on("trackStart", async (queue,track) => {
+    const { player, client } = require('../index.js')
 
     const guildData = await Guild.findOne({ id:queue.guild.id })
     if(guildData === null) return

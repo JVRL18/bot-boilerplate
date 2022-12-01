@@ -3,7 +3,7 @@ const { token, MONGO_URI, prefix } = require("./config.json");
 const { Player } = require('discord-player')
 const { connect } = require("mongoose");
 const { readdirSync } = require("fs");
-const { loadEvents, loadPlayer } = require('./configs/utils/botLoad')
+const { loadEvents, loadPlayer, loadAssets } = require('./configs/utils/botLoad')
 
 const myIntents = new IntentsBitField();
 myIntents.add(
@@ -22,9 +22,9 @@ const player = new Player(client, {
   }
 })
 
-
 client.prefix = prefix;
 client.commands = new Collection();
+client.userTemp = new Collection();
 client.player = player
 
 //commands loader
@@ -90,16 +90,20 @@ for (const file of eventFiles) {
 
 client.login(token)
   .then(async () => {
-    console.log("\n\x1b[32m[!] Bot Status: ONLINE")
+    const { name } = require('../package.json')
+    const top = `\x1b[34m┏╋◆ ${name.toUpperCase()} ◆╋┓\n\n\x1b[31m┏╋━━━━━━◥◣◆◢◤━━━━━━━╋┓`
+    const bottom = `\x1b[31m┗╋━━━━━━◢◤◆◥◣━━━━━━━╋┛\n\n\x1b[34m┏╋◆ ${name.toUpperCase()} ◆╋┓\n\n`
+    console.log('\n'+top+"\n\n\x1b[32m[!] Bot Status: ONLINE")
     //exports client && player for acessing everywhere and not losing the types.
     module.exports = {
       client:client,
       player:player
     }
+    loadAssets()
     loadEvents(client)
     loadPlayer()
     await connect(MONGO_URI || "", { keepAlive: true })
-      .then(res => console.log("\x1b[32m[!] DataBase status: ONLINE"))
+      .then(res => console.log("\x1b[32m[!] DataBase status: ONLINE\n\n"+bottom))
       .catch(err => console.log("\x1b[31mDataBase login err: " + err))
   })
-  .catch(err => console.log("\x1b[31mBot login err: " + err))
+  .catch(err => {console.log("\x1b[31mBot login err: " + err); console.log(err)})

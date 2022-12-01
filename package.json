@@ -1,5 +1,5 @@
 {
-  "name": "jay-boilerplate",
+  "name": "ste-bot-experimental",
   "version": "2.0.0",
   "description": "betterbot boilerplate",
   "main": "./src/index.js",
@@ -30,5 +30,6 @@
     "nodemon": "^2.0.20",
     "pretty-ms": "^7.0.1",
     "readline-sync": "^1.4.10"
-  }
+  },
+  "devDependencies": {}
 }

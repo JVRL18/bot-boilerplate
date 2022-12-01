@@ -6,6 +6,7 @@ module.exports = {
         const queue = player.getQueue(i.guildId)
 
         if (!queue || !queue.playing || queue.tracks.length < 2) return await i.reply({ content: "Doesn't have any music on playlist", ephemeral:true })
+        
         if (args != Number(args)) args = 1
 
         const { tracks, current } = queue
@@ -18,9 +19,9 @@ module.exports = {
         for (let i = min; i <= max; i++) {
             key = tracks[i]
             if (tracks[i] === undefined) break
-            infos += `**\`${i + 1}\` - **[${key.title}](${key.url}) ** **BY: ${key.author}** \`[${key.duration}]\`**\n\n`
+            infos += `**\`${i + 1}\` - **[${key.title}](${key.url}) ** **BY: ${key.author}**\n\n`
         }
 
-        await i.reply({ embeds: [queue_tracks_embed(infos)], ephemeral: true })
+        await i.reply({ embeds: [queue_tracks_embed(infos, `${pages}/${Math.round((tracks.length / 5) + 0.5)}`)], ephemeral: true })
     }
 }

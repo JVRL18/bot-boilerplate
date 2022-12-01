@@ -14,6 +14,7 @@
 |-->src<br>
   &emsp;|-->assets (aqui ficam as embeds , botões ou seja, a parte visual do bot (v0))<br>
   &emsp;|-->commands (aqui ficam os comandos 2 em 1, slash e message, junto de suas embeds (v1)<br>
+  &emsp;|-->commands_fixed (aqui ficam os comandos fixos executados por botões ou outros tipos de interação)
   &emsp;|-->events (aqui fica uma "abstração" para os eventos event.on() no index, buscarem dentro dos commandos)<br>
   &emsp;|-->events_custom (aqui ficam os eventos relacionados a canais fixos botões de registro/ticket) <br>
   &emsp;|-->events_music (aqui ficam os eventos do discord player) <br>
@@ -96,7 +97,7 @@ Para abrir este projeto você necessita das seguintes ferramentas:
         * Recomended to use new structure for new commands: `New folder` using the `command name` with a `'_embeds.js' file inside` and also a command file that has the same name as the folder.
     </details>
 * `2.0.0 - 26/11/2022`
-    * MUSIC FEATURES
+    * `MUSIC FEATURES UPDATE`
     * <details><summary>NEW</summary>
 
         * Play command added.
@@ -105,6 +106,7 @@ Para abrir este projeto você necessita das seguintes ferramentas:
         * NEW folder `events_music` created for holding all discord-player `music events`.
         * NEW "button" handler created at `interactionCreate` in `events_custom`.
     </details>
+
     * <details><summary>System changes</summary>
 
         * `Tickets` events changed according to `fixed buttons rules` and moved to `commands_fixed/ticket`
@@ -113,10 +115,39 @@ Para abrir este projeto você necessita das seguintes ferramentas:
         * Edited folder `commands_fixed` strucutre for holding all `fixed buttons` commands.
         * old `music` commands refactored.
     </details>
+
     * <details><summary>REMOVED</summary>
 
         * `unite_api` deleted.
         * old `music assets` at `assets folder` deleted.
+    </details>
+* `2.1.0` - `01/11/2022`
+    * `HOTFIX + Quick update`
+    * <details><summary>BUGS REMOVED</summary>
+
+        * `fixed` music `loop` bug when player is not defined.
+        * `fixed` pause and queue slash commands.
+        * `fixed` bug when pressing queue button doesn't show the actual queue and just show when using chat input commands
+    </details>
+       
+    * <details><summary>Changes</summary>
+
+        * `Pause-Skip-Stop` commands now requires user to be admin/music owner
+        * Play embeds now calc total playlist length and display single songs duration.
+        * Queue embeds changed to display how many pages is there.
+        * Almost everthing in music changed to `check permissions` before command execution, using `emojis`
+    </details>
+
+    * <details><summary>New</summary>
+
+        * New button to change the added song when `play` command is triggered in case added song is wrong.
+        * New buttons commands `save` `delete`, to user save current music to database and use later with favorite command.
+        * New commands `favorite` `autoplay`
+        * New music events `channelEmpty` `queueEnd` that has the same functions as `stop command` but automaticly when event is triggered
+        * New file `global_embeds` for embeds that will be used in mutiple cases
+        * New `dev` command `button` for testing button emoji preview 
+        * New file emojis.js that exports emojis ID to be accessed everywere `doesn't work in embeds if you're not in the CU discord server.`
+        * New `Debug` features in `configs/utils` folder for a better console.log view and checking `music` permissions for almost every music command.
     </details>
 ## 📋 Licença/License
 

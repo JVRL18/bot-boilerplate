@@ -1,11 +1,12 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { queue_tracks_embed } = require("./_embeds");
 
-const code = async (i, client, args) => {
+const code = async (i, client, args = 1) => {
+    const user = i?.user?.id || i?.author?.id
     const { player } = require("../../../index")
     const queue = player.getQueue(i.guildId)
 
-    if (!queue || !queue.playing) return await i.reply({ content: "Doesn't have any music on playlist", ephemeral:true })
+    if (!queue || !queue.playing || queue.tracks.length < 2) return await i.reply({ content: "Doesn't have any music on playlist", ephemeral:true })
     if (args != Number(args)) args = 1
 
     const { tracks, current } = queue
@@ -17,10 +18,10 @@ const code = async (i, client, args) => {
     for (let i = min; i <= max; i++) {
         key = tracks[i]
         if(tracks[i] === undefined) break
-        infos += `**\`${i + 1}\` - **[${key.title}](${key.url}) ** **BY: ${key.author}** \`[${key.duration}]\`**\n\n`
+        infos += `**\`${i + 1}\` - **[${key.title}](${key.url}) ** **BY: ${key.author}** \`[${key.duration}]\`** ${key.requestedBy.id === user.id ? "**<< YOUR SONG**" : ''}\n\n`
     }
 
-    i.reply({ embeds: [queue_tracks_embed(infos)], ephemeral:true })
+    i.reply({ embeds: [queue_tracks_embed(infos, `${pages}/${Math.round((tracks.length / 5) + 0.5)}`)], ephemeral:true })
 }
 
 module.exports = {

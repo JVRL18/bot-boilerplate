@@ -8,10 +8,10 @@ const Test = new mongoose.Schema({
 const User = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
 
-  ticketOpen: {type: Boolean, default:false},
-  tickets: {type: Number, default:0 },
+  ticketOpen: { type: Boolean, default: false },
+  tickets: { type: Number, default: 0 },
 
-  wallet: { type: Number, default:0 },
+  wallet: { type: Number, default: 0 },
   bank: { type: Number, default: 0 },
   cooldowns: {
     daily: { type: Date },
@@ -21,14 +21,15 @@ const User = new mongoose.Schema({
 
   perks: { type: Object, default: {} },
 
-  playlists:{type: Array, default:[] },
-  playHistory:{type: Array, default:[] }
+  playlists: { type: Array, default: [] },
+  favorites: { type: Array, default: [] },
+  playHistory: { type: Array, default: [] },
 
 });
 
 const Playlists = new mongoose.Schema({
-  id: {type:String, unique:true, required:true },
-  listening:{type:Array, default:[]}
+  id: { type: String, unique: true, required: true },
+  listening: { type: Array, default: [] }
 })
 
 const Transactions = new mongoose.Schema({
@@ -40,17 +41,19 @@ const Guild = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
   owner: { type: String, unique: true },
 
-  openTicketSource: {type: Object, default:{}},
-  ticketChannel: { type:Object, default: {} },
-  openTickets: {type: Array, default: []},
+  openTicketSource: { type: Object, default: {} },
+  ticketChannel: { type: Object, default: {} },
+  openTickets: { type: Array, default: [] },
 
   channels: { type: Object, default: {} },
   admins: { type: Object, default: {} },
 
-  musicChannel: {type: String, default: null},
-  tempMessage: {type: String, default: null},
-  isPlaying: {type: Boolean, default: false},
-  isPaused: {type: Boolean, default:false},
+  musicChannel: { type: String, default: null },
+  tempMessage: { type: String, default: null },
+  isPlaying: { type: Boolean, default: false },
+  voiceChannel: { type: String, default:null},
+  isPaused: { type: Boolean, default: false },
+  paused: { type: String, default: null },
 });
 
 class Channel {
@@ -99,5 +102,5 @@ module.exports = {
   Channel: Channel,
   Test: mongoose.model("Test", Test),
   Transactions: mongoose.model("Transactions", Transactions),
-  Playlists:mongoose.model("Playlists", Playlists)
+  Playlists: mongoose.model("Playlists", Playlists)
 };
