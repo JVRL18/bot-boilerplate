@@ -7,18 +7,20 @@ const { check } = require('../../../configs/utils/debug')
 module.exports = {
     execute: async (i, client) => {
         const { player } = require("../../../index")
-        const userData = await User.findOne({ id: i.user.id })
+
+        const userData = await User.findOne({ id: i.user.id }) || new User({ id: i.user.id })
+
         const queue = player.getQueue(i.guildId)
-        
-        if (!queue || !queue.playing) return await i.reply({ embeds:[error_removal_embed(`${e1} Can't do that when music is not playing. ${e1}`)], ephemeral: true })
-        
+
+        if (!queue || !queue.playing) return await i.reply({ embeds: [error_removal_embed(`${e1} Can't do that when music is not playing. ${e1}`)], ephemeral: true })
+
         let found = false
         let index = 0
         let findex
         const { title, url, author, duration } = queue.current
-        
+
         userData.favorites.filter(e => {
-            if(e.url === url){
+            if (e.url === url) {
                 found = true
                 findex = index
                 return
@@ -26,14 +28,14 @@ module.exports = {
             index++
         })
 
-        if(!found) return i.reply({ embeds: [error_removal_embed(`${e1} Song is not saved in favorites. ${e1}`)], ephemeral:true })
+        if (!found) return i.reply({ embeds: [error_removal_embed(`${e1} Song is not saved in favorites. ${e1}`)], ephemeral: true })
 
-        const removed = userData.favorites.splice(findex, 1)
-        check(`${removed}`)
+        await userData.favorites.splice(findex, 1)
+
         await userData.save()
 
         let text = `${e2} Song sucessfully removed from favorites playlist. ${e2}`
-        return i.reply({ embeds: [success_removal_embed(text)], ephemeral:true })
+        return i.reply({ embeds: [success_removal_embed(text)], ephemeral: true })
 
     }
 }

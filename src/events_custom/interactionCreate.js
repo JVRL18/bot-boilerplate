@@ -1,9 +1,11 @@
 const { client } = require('../index.js')
-const { Guild } = require('../models/schemas')
+const { Guild, User } = require('../models/schemas')
 const { readdirSync } = require('fs')
 
 client.on('interactionCreate', async interaction => {
-  const guildData = await Guild.findOne({ id: interaction.guild.id })
+  const guildData = await Guild.findOne({ id: interaction.guild.id }) || new Guild({ id: interaction.guild.id })
+  const userData = await User.findOne({ id: interaction.user.id }) || new User({ id: interaction.user.id })
+  
   if (guildData === null) return
 
   const commandFiles = [];

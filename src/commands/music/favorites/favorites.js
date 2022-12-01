@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 const { User, Guild } = require('../../../models/schemas')
 const { Track } = require('discord-player')
 const { mult_music_play_embed } = require('./_embeds.js');
-const { verify } = require('../../../configs/utils/debug');
+const { verify, check } = require('../../../configs/utils/debug');
 
 const code = async (user, i) => {
     const { player } = require('../../../index')
@@ -17,12 +17,13 @@ const code = async (user, i) => {
 
     const queue = player.getQueue(i.guild.id) || player.createQueue(i.guild)
 
-    const userData = await User.findOne({ id: user.id })
+    const userData = await User.findOne({ id: user.id }) || new User({ id: user.id})
 
-    if (userData.favorites.length < 1) {
+    if (userData.favorites.length === 0) {
         if (i.type === 2) return await i.editReply({ content: 'no favorites saved', ephemeral: true })
         await i.reply({ content: 'no favorites saved', ephemeral: true })
     }
+
     const tracks = userData.favorites.map(e => new Track(player, {
         title: e.title,
         description: e.track.description,

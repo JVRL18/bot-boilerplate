@@ -121,7 +121,7 @@ Para abrir este projeto você necessita das seguintes ferramentas:
         * `unite_api` deleted.
         * old `music assets` at `assets folder` deleted.
     </details>
-* `2.1.0` - `01/11/2022`
+* `2.1.0` - `01/12/2022`
     * `HOTFIX + Quick update`
     * <details><summary>BUGS REMOVED</summary>
 
@@ -148,6 +148,13 @@ Para abrir este projeto você necessita das seguintes ferramentas:
         * New `dev` command `button` for testing button emoji preview 
         * New file emojis.js that exports emojis ID to be accessed everywere `doesn't work in embeds if you're not in the CU discord server.`
         * New `Debug` features in `configs/utils` folder for a better console.log view and checking `music` permissions for almost every music command.
+    </details>
+* `2.1.1` - `01/12/2022`
+    * `Patch`
+    * <details><summary>BUGS FIXED</summary>
+
+        * `fixed` save command when user has no profile and now strigify data the parse the data to database to prevent error 
+        * `fixed` bug that bot doesn't reset the channels that was set to db when disconnecting
     </details>
 ## 📋 Licença/License
 
