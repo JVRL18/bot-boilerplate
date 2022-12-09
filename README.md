@@ -1,4 +1,4 @@
-#Project stopped duo to the lost of the focus and will not be delete for documentation and historical reasons. this repository will be updated and will given a link to the new version in the future.
+# Project stopped duo to the lost of the focus and will not be delete for documentation and historical reasons. this repository will be updated and will given a link to the new version in the future.
 
 # DiscordJS bot boilerplate
 
